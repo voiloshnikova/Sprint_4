@@ -1,42 +1,16 @@
-package org.example.yandex.test;
+package org.example.yandex.test.order.create;
 
 import org.example.yandex.pom.MainPage;
 import org.example.yandex.pom.OrderPage;
 import org.junit.After;
-import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 
 import static junit.framework.TestCase.assertTrue;
 
 @RunWith(Parameterized.class)
-public class CreateOrderTest {
-
-    private final String name;
-    private final String surname;
-    private final String address;
-    private final String metro;
-    private final String telephone;
-    private final String data;
-    private final String color;
-
-    private WebDriver driver;
-
-    public CreateOrderTest(String name, String surname, String address, String metro, String telephone, String data, String color, String delivery) {
-        this.name = name;
-        this.surname = surname;
-        this.address = address;
-        this.metro = metro;
-        this.telephone = telephone;
-        this.data = data;
-        this.color = color;
-        this.delivery = delivery;
-    }
-
-    private final String delivery;
+public class BaseCreateOrderTest {
 
     @Parameterized.Parameters
     public static Object[][] getData() {
@@ -47,37 +21,27 @@ public class CreateOrderTest {
         };
     }
 
-    @Test
-    public void createOrderByHeaderButtonChrome() {
-        // драйвер для браузера Chrome
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        createHeaderOrder();
+    private final String name;
+    private final String surname;
+    private final String address;
+    private final String metro;
+    private final String telephone;
+    private final String data;
+    private final String color;
+    private final String delivery;
+
+    public BaseCreateOrderTest(String name, String surname, String address, String metro, String telephone, String data, String color, String delivery) {
+        this.name = name;
+        this.surname = surname;
+        this.address = address;
+        this.metro = metro;
+        this.telephone = telephone;
+        this.data = data;
+        this.color = color;
+        this.delivery = delivery;
     }
 
-    @Test
-    public void createOrderByMainButtonChrome() {
-        // драйвер для браузера Chrome
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        createMainOrder();
-    }
-
-    @Test
-    public void createOrderByHeaderButtonFirefox() {
-        // драйвер для браузера Firefox
-        driver = new FirefoxDriver();
-        driver.manage().window().maximize();
-        createHeaderOrder();
-    }
-
-    @Test
-    public void createOrderByMainButtonFirefox() {
-        // драйвер для браузера Firefox
-        driver = new FirefoxDriver();
-        driver.manage().window().maximize();
-        createMainOrder();
-    }
+    protected WebDriver driver;
 
     @After
     public void teardown() {
@@ -85,7 +49,9 @@ public class CreateOrderTest {
         driver.quit();
     }
 
-    private void createHeaderOrder() {
+
+    void createHeaderOrder() {
+        driver.manage().window().maximize();
         // переход на страницу тестового приложения
         driver.get("https://qa-scooter.praktikum-services.ru/");
 
@@ -95,7 +61,8 @@ public class CreateOrderTest {
         doInternal();
     }
 
-    private void createMainOrder() {
+    void createMainOrder() {
+        driver.manage().window().maximize();
         // переход на страницу тестового приложения
         driver.get("https://qa-scooter.praktikum-services.ru/");
 
@@ -112,4 +79,5 @@ public class CreateOrderTest {
         objOrderPage.fillSecondPart(this.data, this.color, this.delivery);
         assertTrue(objOrderPage.getOrderBookMessage().contains("Заказ оформлен"));
     }
+
 }

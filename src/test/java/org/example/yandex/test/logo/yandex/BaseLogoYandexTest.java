@@ -1,49 +1,23 @@
-package org.example.yandex.test;
+package org.example.yandex.test.logo.yandex;
 
 import org.example.yandex.pom.MainPage;
 import org.junit.After;
-import org.junit.Test;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-import static junit.framework.TestCase.assertEquals;
+import static org.junit.Assert.assertEquals;
 import static org.openqa.selenium.support.ui.ExpectedConditions.numberOfWindowsToBe;
 import static org.openqa.selenium.support.ui.ExpectedConditions.titleIs;
 
-public class LogoYandexTest {
-    public static final String URL_MAIN = "https://qa-scooter.praktikum-services.ru/";
-    public static final String URL_ORDER = "https://qa-scooter.praktikum-services.ru/order";
-    public static final String URL_YANDEX = "https://dzen.ru/?yredirect=true";
+public class BaseLogoYandexTest {
+    protected WebDriver driver;
+    static final String URL_MAIN = "https://qa-scooter.praktikum-services.ru/";
+    static final String URL_ORDER = "https://qa-scooter.praktikum-services.ru/order";
+    static final String URL_YANDEX = "https://dzen.ru/?yredirect=true";
 
-    private WebDriver driver;
-
-    @Test
-    public void checkOpenMainPageFromMainChromeTest() {
-        driver = new ChromeDriver();
-        doInternalMain();
-    }
-    @Test
-    public void checkOpenMainPageFromOrderChromeTest() {
-        driver = new ChromeDriver();
-        doInternalOrder();
-    }
-
-    @Test
-    public void checkOpenMainPageFromMainFirefoxTest() {
-        driver = new FirefoxDriver();
-        doInternalMain();
-    }
-    @Test
-    public void checkOpenMainPageFromOrderFirefoxTest() {
-        driver = new FirefoxDriver();
-        doInternalOrder();
-    }
-
-    private void doInternalMain() {
+    void doInternalMain() {
         driver.manage().window().maximize();
         driver.get(URL_MAIN);
         String originalWindow = driver.getWindowHandle();
@@ -64,7 +38,7 @@ public class LogoYandexTest {
 
 
 
-    private void doInternalOrder() {
+    void doInternalOrder() {
         driver.manage().window().maximize();
         driver.get(URL_ORDER);
         String originalWindow = driver.getWindowHandle();

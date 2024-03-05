@@ -10,9 +10,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 
 public class MainPage {
-    public MainPage(WebDriver driver) {
-        this.driver = driver;
-    }
+
+    private final WebDriver driver;
 
     // Логотип Яндекс header
     private final By LOGO_YANDEX = By.className("Header_LogoYandex__3TSOI");
@@ -32,7 +31,10 @@ public class MainPage {
     // Кнопка Заказать на главном экране
     private final By MAIN_BUTTON_ORDER_WRAPPER = By.className("Home_FinishButton__1_cWm");
 
-    private WebDriver driver;
+    public MainPage(WebDriver driver) {
+        this.driver = driver;
+        new CookiePopup(driver).acceptCookieIfNecessary();
+    }
 
     private static By getQuestionLocator(String questionId) {
         return By.id(questionId);

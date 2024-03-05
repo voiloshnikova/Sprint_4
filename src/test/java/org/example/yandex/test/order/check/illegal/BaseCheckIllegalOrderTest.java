@@ -1,31 +1,17 @@
-package org.example.yandex.test;
+package org.example.yandex.test.order.check.illegal;
 
 import org.example.yandex.pom.MainPage;
 import org.example.yandex.pom.TrackPage;
 import org.junit.After;
-import org.junit.Test;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 
 import static junit.framework.TestCase.assertTrue;
 
-public class CheckIllegalOrderTest {
-    private WebDriver driver;
+public class BaseCheckIllegalOrderTest {
 
-    @Test
-    public void checkIllegalOrderChromeTest() {
-        driver = new ChromeDriver();
-        doInternal();
-    }
+    protected WebDriver driver;
 
-    @Test
-    public void checkIllegalOrderFirefoxTest() {
-        driver = new FirefoxDriver();
-        doInternal();
-    }
-
-    private void doInternal(){
+    void doInternal(){
         driver.manage().window().maximize();
         driver.get("https://qa-scooter.praktikum-services.ru/");
 
@@ -41,4 +27,5 @@ public class CheckIllegalOrderTest {
         // Закрой браузер
         driver.quit();
     }
+
 }

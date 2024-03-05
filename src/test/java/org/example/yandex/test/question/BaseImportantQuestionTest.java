@@ -1,25 +1,23 @@
-package org.example.yandex.test;
+package org.example.yandex.test.question;
 
 import org.example.yandex.pom.MainPage;
 import org.junit.After;
-import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 
 import static org.junit.Assert.assertEquals;
 
 @RunWith(Parameterized.class)
-public class ImportantQuestionsTest {
+public class BaseImportantQuestionTest {
+
     private final String question;
     private final String response;
     private final String questionId;
     private final String responseId;
-    private WebDriver driver;
+    protected WebDriver driver;
 
-    public ImportantQuestionsTest(String questionId, String responseId, String question, String response) {
+    public BaseImportantQuestionTest(String questionId, String responseId, String question, String response) {
         this.question = question;
         this.response = response;
         this.questionId = questionId;
@@ -43,27 +41,13 @@ public class ImportantQuestionsTest {
         };
     }
 
-    @Test
-    public void checkQuestionChrome() {
-        // драйвер для браузера Chrome
-        driver = new ChromeDriver();
-        doInternalStuff();
-    }
-
-    @Test
-    public void checkQuestionFirefox() {
-        // драйвер для браузера Firefox
-        driver = new FirefoxDriver();
-        doInternalStuff();
-    }
-
     @After
     public void teardown() {
         // Закрой браузер
         driver.quit();
     }
 
-    private void doInternalStuff() {
+    void doInternalStuff() {
         // переход на страницу тестового приложения
         driver.get("https://qa-scooter.praktikum-services.ru/");
         // создание объекта главной страницы приложения

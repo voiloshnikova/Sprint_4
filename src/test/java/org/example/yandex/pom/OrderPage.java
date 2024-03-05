@@ -9,11 +9,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 
 public class OrderPage {
-    public OrderPage(WebDriver driver) {
-        this.driver = driver;
-    }
 
-    private WebDriver driver;
+    private final WebDriver driver;
 
     // Имя
     private final By NAME = By.xpath("//input[@placeholder='* Имя']");
@@ -46,6 +43,11 @@ public class OrderPage {
     private final By YES_BUTTON = By.xpath("//div[@class='Order_Buttons__1xGrp']//button[text()='Да']");
     // Поп-ап Заказ оформлен
     private final By POPUP_ORDER_BOOK = By.className("Order_ModalHeader__3FDaJ");
+
+    public OrderPage(WebDriver driver) {
+        this.driver = driver;
+        new CookiePopup(driver).acceptCookieIfNecessary();
+    }
 
     private void inputName(String value) {
         driver.findElement(NAME).sendKeys(value);
